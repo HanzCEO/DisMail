@@ -24,7 +24,7 @@ Short Flag | Long Flag | Description
 **All of the flags/arguments is optional**
 
 # What is 'username' and 'domain'?
-username is a word before '@'
+username is a word before '@' <br>
 domain is a word after '@' (like gmail.com, yahoo.com, mail.ru, etc.)
 
 **Function: for retrieve inbox from specific email 'username'@'domain'**
