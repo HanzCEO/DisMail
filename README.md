@@ -6,12 +6,13 @@ Python 3.7.4 based app for disposable email service
 
 # How to use
 ### 1. From source
-         ```git clone https://github.com/HanzHaxors/DisposableEmailCLI
-            cd DisposableEmailCLI
-            python3 emailinbox.py
-         ```
-### 1. .exe File
-         1. Run dismail.exe normally
+```
+git clone https://github.com/HanzHaxors/DisposableEmailCLI
+cd DisposableEmailCLI
+python3 emailinbox.py
+```
+### 2. .exe File
+Run dismail.exe normally
 
 # Flags/Arguments
 Short Flag | Long Flag | Description
