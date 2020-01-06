@@ -1,7 +1,14 @@
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style, init
 import os, threading, argparse, requests, time, json, random
-from secmail.api import inbox, message, attachment
+from secmail.api import *
+
+'''
+BUG FIXES
+BUG #1:
+ - Can't open the email by id
+ SOLVED: it was a <built_in_id> i should use another thanks to https://github.com/tashan022
+'''
 
 # clear screen
 def ClrScrn():
@@ -53,16 +60,26 @@ resetall = Style.RESET_ALL
 #############################################
 
 ##################### MAIN FUNCTIONS ########
-def goRead(id, login, domain):
-	theRes = message(login, domain, id)
+def goRead(login, domain, eid):
+	theRes = mes(login, domain, eid)
 	ClrScrn()
-	print(theRes)
-	table = PrettyTable()
-	table.field_names = [f"{flgreen}Body"]
-	#table.add_row(f"{flwhite+str(theRes['body'])}")
-	print(table)
-	os.system('pause')
-	tableTheInbox(login, domain)
+	if theRes == "Message not found":
+		print(theRes)
+		os.system('pause')
+		tableTheInbox(login, domain)
+	else:
+		theRes = loads(theRes)
+		table = PrettyTable()
+		table.field_names = [f"{flgreen}Body", f"{fcyan}Attachments{fwhite}"]
+		try:
+			for x in range(1000):
+				table.add_row([flwhite+theRes["textBody"], fcyan+theRes["attachments"][x]+fwhite])
+			
+		except IndexError:
+			table.add_row([flwhite+theRes["textBody"], ""])
+		print(table)
+		os.system('pause')
+		tableTheInbox(login, domain)
 	
 
 def tableTheInbox(login, domain):
@@ -79,14 +96,14 @@ def tableTheInbox(login, domain):
 	if inp == "r":
 		tableTheInbox(login, domain)
 	else:
-		goRead(str(inp), login, domain)
+		goRead(login, domain, str(inp))
 def hlp():
 	ClrScrn()
 	table = PrettyTable()
 	table.field_names = [f"{flred}Full Argument", f"{flgreen}Less Argument", f"{fwhite}Description"]
 	table.add_row([f"{fred}--help", f"{fgreen}-h", f"{fwhite}Help. show this message"])
-	table.add_row([f"{fred}--login", f"{fgreen}-l", f"{fwhite}username of email (ex. {bcyan}hanzo221{bgreen}@1secmail.com{resetall} the cyan colored is 'login')"])
-	table.add_row([f"{fred}--domain", f"{fgreen}-d", f"{fwhite}host of email (ex. {bcyan}hanzo221{bgreen}@1secmail.com{resetall} the green colored is 'domain')"])
+	table.add_row([f"{fred}--login", f"{fgreen}-l", f"{fwhite}username of email (ex. {bcyan}hanzo221{bmagenta}@{bgreen}1secmail.com{resetall} the cyan colored is 'login')"])
+	table.add_row([f"{fred}--domain", f"{fgreen}-d", f"{fwhite}host of email (ex. {bcyan}hanzo221{bmagenta}@{bgreen}1secmail.com{resetall} the green colored is 'domain')"])
 	print(table)
 
 def initme():
