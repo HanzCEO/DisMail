@@ -12,7 +12,7 @@ cd DisposableEmailCLI
 python3 emailinbox.py
 ```
 ### 2. .exe File
-Run dismail.exe normally
+Run `dismail.exe` normally
 
 # Flags/Arguments
 Short Flag | Long Flag | Description
