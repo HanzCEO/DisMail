@@ -18,6 +18,7 @@ Run `dismail.exe` normally
 Short Flag | Long Flag | Description
 ---------- | --------- | -----------
 -h | --help | Shows help message (and exit)
+-e | --email | A combination of login and domain like this, hanztest@1secmail.com PS: type it all for easy use including '@'
 -l | --login | Username of email
 -d | --domain | Domain of email (without '@')
 
@@ -25,6 +26,6 @@ Short Flag | Long Flag | Description
 
 # What is 'username' and 'domain'?
 username is a word before '@' <br>
-domain is a word after '@' (like gmail.com, yahoo.com, mail.ru, etc.)
+domain is a word after '@' (like gmail.com, yahoo.com, etc.)
 
 **Function: for retrieve inbox from specific email 'username'@'domain'**
