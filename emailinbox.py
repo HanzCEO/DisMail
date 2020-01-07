@@ -70,31 +70,53 @@ def goRead(login, domain, eid):
 	else:
 		theRes = loads(theRes)
 		table = PrettyTable()
-		table.field_names = [f"{flgreen}Body", f"{fcyan}Attachments{fwhite}"]
+		print(flwhite+theRes["textBody"]+"\n\n\n")
+		table.field_names = [f"{fcyan}Attachments{fwhite}", f"{flyellow}Type{fwhite}", f"{flmagenta}Size (Bytes){fwhite}"]
+		print("\n\n")
 		try:
 			for x in range(1000):
-				table.add_row([flwhite+theRes["textBody"], fcyan+theRes["attachments"][x]+fwhite])
+				table.add_row([fcyan+theRes["attachments"][x]["filename"], flyellow+theRes["attachments"][x]["contentType"], flmagenta+str(theRes["attachments"][x]["size"])])
 			
 		except IndexError:
-			table.add_row([flwhite+theRes["textBody"], ""])
-		print(table)
-		os.system('pause')
-		tableTheInbox(login, domain)
+			print(table)
+			if len(theRes["attachments"]) > 0:
+				try:
+					fi = input(f'{fcyan}[+] Attachment to download (ctrl + c to cancel): ')
+					attachment(login, domain, eid, fi)
+				except KeyboardInterrupt:
+					print(f'{flmagenta}\n[#] Cancelling...')
+			
+			os.system('pause')
+			tableTheInbox(login, domain)
 	
 
 def tableTheInbox(login, domain):
 	resInb = inbox(login, domain)
 	ClrScrn()
-	print(f"{fwhite}Email address: "+bcyan+login+bgreen+"@"+domain+resetall)
+	print(f"{fwhite}Email address: "+bcyan+login+freset+"@"+bgreen+domain+resetall)
 	theJson = resInb
 	table = PrettyTable()
 	table.field_names = [f"{flcyan}id",f"{flgreen}From",f"{flmagenta}Subject",f"{flyellow}Date"]
 	for x in range(len(theJson)):
 		table.add_row([flcyan+str(theJson[x]['id']),flgreen+theJson[x]['from'],flmagenta+theJson[x]['subject'],flyellow+theJson[x]['date']+freset])
 	print(table)
-	inp = input(f"{fgreen}[+] Message id to read (r to refresh inbox): ")
+	print(f'{fyellow}r - Refresh the inbox\nn - Create new email.')
+	try:
+		inp = input(f"{fgreen}[+] Message id to read: ")
+	except KeyboardInterrupt:
+		print(f'{fred}\n[!] Exitting...')
+		exit()
+	
+	print(f'{fcyan}[#] Loading message...{fwhite}')
+	
 	if inp == "r":
 		tableTheInbox(login, domain)
+	elif inp == "n":
+		log = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")+str(random.randint(1,10000))
+		dom = random.choice(["1secmail.com","1secmail.net","1secmail.org"])
+		
+		
+		tableTheInbox(log, dom)
 	else:
 		goRead(login, domain, str(inp))
 def hlp():
@@ -102,6 +124,7 @@ def hlp():
 	table = PrettyTable()
 	table.field_names = [f"{flred}Full Argument", f"{flgreen}Less Argument", f"{fwhite}Description"]
 	table.add_row([f"{fred}--help", f"{fgreen}-h", f"{fwhite}Help. show this message"])
+	table.add_row([f"{fred}--email", f"{fgreen}-e", f"{fwhite}A combination of login and domain like this, hanztest@1secmail.com\nPS: type it all for easy use including '@'"])
 	table.add_row([f"{fred}--login", f"{fgreen}-l", f"{fwhite}username of email (ex. {bcyan}hanzo221{bmagenta}@{bgreen}1secmail.com{resetall} the cyan colored is 'login')"])
 	table.add_row([f"{fred}--domain", f"{fgreen}-d", f"{fwhite}host of email (ex. {bcyan}hanzo221{bmagenta}@{bgreen}1secmail.com{resetall} the green colored is 'domain')"])
 	print(table)
@@ -109,10 +132,12 @@ def hlp():
 def initme():
 	global arg_login
 	global arg_domain
+	global arg_email
 	
 	parser = argparse.ArgumentParser(description="Disposable Email Generator and Inbox", add_help=False)
 	parser.add_argument("-h", "--help", help="Help Menu", action="store_true")
 	
+	parser.add_argument("-e", "--email", type=str)
 	parser.add_argument("-l", "--login", type=str)
 	parser.add_argument("-d", "--domain", type=str)
 	
@@ -127,6 +152,10 @@ def initme():
 		arg_domain = args.domain
 		
 		tableTheInbox(arg_login, arg_domain)
+	elif '@' in args.email:
+		arg_email = args.email.split('@')
+		
+		tableTheInbox(arg_email[0], arg_email[1])
 	else:
 		log = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")+str(random.randint(1,10000))
 		dom = random.choice(["1secmail.com","1secmail.net","1secmail.org"])
