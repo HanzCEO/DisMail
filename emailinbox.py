@@ -1,18 +1,21 @@
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style, init
-import os, threading, argparse, requests, time, json, random
+import os, threading, argparse, time, json, random, re
 from secmail.api import *
-
+from requests import *
+from requests.exceptions import *
+from subprocess import call as cmd
 '''
 BUG FIXES
 BUG #1:
  - Can't open the email by id
- SOLVED: it was a <built_in_id> i should use another thanks to https://github.com/tashan022
+ SOLVED: it was a <built_in_id> i should use another. thanks to https://github.com/tashan022
 '''
 
 # clear screen
 def ClrScrn():
 	os.system('cls' if os.name == 'nt' else 'clear')
+	print("\n")
 
 ############# COLORAMA ######################
 init()
@@ -70,19 +73,39 @@ def goRead(login, domain, eid):
 	else:
 		theRes = loads(theRes)
 		table = PrettyTable()
+		tabled = PrettyTable()
 		print(flwhite+theRes["textBody"]+"\n\n\n")
-		table.field_names = [f"{fcyan}Attachments{fwhite}", f"{flyellow}Type{fwhite}", f"{flmagenta}Size (Bytes){fwhite}"]
+		tabled.field_names = [f"{fcyan}No{fwhite}", f"{flyellow}URL{fwhite}"]
+		tabled.align = 'l'
+		table.align = 'l'
 		print("\n\n")
+		regexed = re.findall(r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", theRes["body"])
+		try:
+			for x in range(1000000000):
+				tabled.add_row([fcyan+str(x+1), flyellow+regexed[x]+fwhite])
+		
+		#except IndexError:
+		#	pass
+		#
+		#try:
+		#	regexed = re.findall(r"(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", theRes["body"])
+		#	for x in range(1000000000):
+		#		tabled.add_row([fcyan+str(x), flyellow+regexed[x]])
+		#	
+		except IndexError:
+			print(tabled)
+		table.field_names = [f"{fcyan}Attachments{fwhite}", f"{flyellow}Type{fwhite}", f"{flmagenta}Size (Bytes){fwhite}"]
+		print("\nMessageID: {eid}\n".format(eid=eid))
 		try:
 			for x in range(1000):
-				table.add_row([fcyan+theRes["attachments"][x]["filename"], flyellow+theRes["attachments"][x]["contentType"], flmagenta+str(theRes["attachments"][x]["size"])])
+				table.add_row([fcyan+theRes["attachments"][x]["filename"], flyellow+theRes["attachments"][x]["contentType"], flmagenta+str(theRes["attachments"][x]["size"])+fwhite])
 			
 		except IndexError:
 			print(table)
 			if len(theRes["attachments"]) > 0:
 				try:
 					fi = input(f'{fcyan}[+] Attachment to download (ctrl + c to cancel): ')
-					attachment(login, domain, eid, fi)
+					attachment(login, domain, eid, fi, theRes["attachments"][x]["size"])
 				except KeyboardInterrupt:
 					print(f'{flmagenta}\n[#] Cancelling...')
 			
@@ -91,34 +114,59 @@ def goRead(login, domain, eid):
 	
 
 def tableTheInbox(login, domain):
-	resInb = inbox(login, domain)
-	ClrScrn()
-	print(f"{fwhite}Email address: "+bcyan+login+freset+"@"+bgreen+domain+resetall)
-	theJson = resInb
-	table = PrettyTable()
-	table.field_names = [f"{flcyan}id",f"{flgreen}From",f"{flmagenta}Subject",f"{flyellow}Date"]
-	for x in range(len(theJson)):
-		table.add_row([flcyan+str(theJson[x]['id']),flgreen+theJson[x]['from'],flmagenta+theJson[x]['subject'],flyellow+theJson[x]['date']+freset])
-	print(table)
-	print(f'{fyellow}r - Refresh the inbox\nn - Create new email.')
+	print(f'{fcyan}[i] Loading...')
 	try:
-		inp = input(f"{fgreen}[+] Message id to read: ")
+		resInb = inbox(login, domain)
+		
+		# v0.4.0: Now you can read mail easier
+		# v0.4.0-t2: Change mails order, still starts with 0
+		# v0.4.0-t3: Change mails order starts with 1
+		mailIds = list()
+		for __mail in resInb:
+			mailIds.append(__mail['id'])
+		mailIds.reverse()
+		resInb.reverse()
+		
+		ClrScrn()
+		#print(mailIds)
+		print(f"{fwhite}Email address: "+bcyan+login+freset+"@"+bgreen+domain+resetall)
+		theJson = resInb
+		table = PrettyTable()
+		table.field_names = [f"{flcyan}id",f"{flgreen}From",f"{flmagenta}Subject",f"{flyellow}Date"]
+		for x in range(len(theJson)):
+			table.add_row([flcyan+str(mailIds.index(theJson[x]['id'])+1),flgreen+theJson[x]['from'],flmagenta+theJson[x]['subject'],flyellow+theJson[x]['date']+freset])
+		print(table)
+		print(f'{fyellow}r - Refresh the inbox\nn - Create new email.')
+		try:
+			inp = input(f"{fgreen}[+] Message id to read: ")
+		except KeyboardInterrupt:
+			print(f'{fred}\n[!] Exitting...')
+			exit()
+		
+		if 'r' in inp or 'n' in inp:
+			''
+		else:
+			print(f'{fcyan}[#] Loading message...{fwhite}')
+		
+		if inp == "r":
+			tableTheInbox(login, domain)
+		elif inp == "n":
+			log = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")+random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")+str(random.randint(1,100000))
+			dom = random.choice(["1secmail.com","1secmail.net","1secmail.org"])
+			
+			
+			tableTheInbox(log, dom)
+		else:
+			try:
+				inp = mailIds[int(inp) - 1] # v0.4.0-t1, v0.4.0-t4: Now optimized
+			except IndexError:
+				print("[!] Index error, referring to the latest email...") # v0.4.0-t5: Added exception catch for smooth performance
+				inp = mailIds[len(mailIds) - 1]
+			goRead(login, domain, str(inp))
+	except ConnectionError:
+		print(f'{fred}[!] Connection error')
 	except KeyboardInterrupt:
-		print(f'{fred}\n[!] Exitting...')
-		exit()
-	
-	print(f'{fcyan}[#] Loading message...{fwhite}')
-	
-	if inp == "r":
-		tableTheInbox(login, domain)
-	elif inp == "n":
-		log = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")+str(random.randint(1,10000))
-		dom = random.choice(["1secmail.com","1secmail.net","1secmail.org"])
-		
-		
-		tableTheInbox(log, dom)
-	else:
-		goRead(login, domain, str(inp))
+		print(f'{fred}[!] Cancelling...')
 def hlp():
 	ClrScrn()
 	table = PrettyTable()
@@ -152,8 +200,10 @@ def initme():
 		arg_domain = args.domain
 		
 		tableTheInbox(arg_login, arg_domain)
-	elif '@' in args.email:
-		arg_email = args.email.split('@')
+	if args.email:
+		arg_email = args.email
+		if '@' in arg_email:
+			arg_email = args.email.split('@')
 		
 		tableTheInbox(arg_email[0], arg_email[1])
 	else:
@@ -165,4 +215,6 @@ def initme():
 		
 
 if __name__ == "__main__":
+	cmd("title Disposable Email :: HanzHaxors", shell=True)
+	ClrScrn()
 	initme()
