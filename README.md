@@ -1,5 +1,5 @@
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)<br/>
-[![GitHub version](https://badge.fury.io/gh/HanzHaxors%2FDisposableEmailCLI.svg)](https://github.com/HanzHaxors/DisposableEmailCLI) [![Github all releases](https://img.shields.io/github/downloads/HanzHaxors/DisposableEmailCLI/total.svg)](https://GitHub.com/HanzHaxors/DisposableEmailCLI/releases/)
+[![GitHub version](https://badge.fury.io/gh/HanzHaxors%2FDisposableEmailCLI.svg)](https://github.com/HanzHaxors/DisposableEmailCLI) [![Github all releases](https://img.shields.io/github/downloads/HanzHaxors/DisposableEmailCLI/total.svg)](https://GitHub.com/HanzHaxors/DisposableEmailCLI/releases/)<br/>[![HitCount](http://hits.dwyl.io/HanzHaxors/DisposableEmailCLI.svg)](#)
 # DisposableEmailCLI
 Python 3.7.4 based app for disposable email service
 
