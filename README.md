@@ -3,8 +3,12 @@
 # DisposableEmailCLI
 Python 3.7.4 based app for disposable email service
 
+# Tested On
+* Python 3.7.x
+* Python 3.8.x
+
 # WARNING!!
-**This project does not responsible for any illegal actions**
+**The author of this repository does not responsible for any illegal actions**
 
 # How to use
 ### 1. From source
