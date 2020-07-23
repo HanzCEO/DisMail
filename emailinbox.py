@@ -9,7 +9,7 @@ from subprocess import call as cmd
 BUG FIXES
 BUG #1:
  - Can't open the email by id
- SOLVED: it was a <built_in_id> i should use another. thanks to https://github.com/tashan022
+ SOLVED: it was a <built_in_id> i should use another. thanks to https://github.com/tashan022 for reporting
 '''
 
 # clear screen
@@ -84,14 +84,6 @@ def goRead(login, domain, eid):
 			for x in range(1000000000):
 				tabled.add_row([fcyan+str(x+1), flyellow+regexed[x]+fwhite])
 		
-		#except IndexError:
-		#	pass
-		#
-		#try:
-		#	regexed = re.findall(r"(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", theRes["body"])
-		#	for x in range(1000000000):
-		#		tabled.add_row([fcyan+str(x), flyellow+regexed[x]])
-		#	
 		except IndexError:
 			print(tabled)
 		table.field_names = [f"{fcyan}Attachments{fwhite}", f"{flyellow}Type{fwhite}", f"{flmagenta}Size (Bytes){fwhite}"]

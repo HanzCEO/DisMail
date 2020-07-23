@@ -1,8 +1,6 @@
 [![GitHub version](https://badge.fury.io/gh/HanzHaxors%2FDisposableEmailCLI.svg?style=flat-square)](https://github.com/HanzHaxors/DisposableEmailCLI) <br/>
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://lbesson.mit-license.org/) [![Github all releases](https://img.shields.io/github/downloads/HanzHaxors/DisposableEmailCLI/total.svg?style=flat-square)](https://GitHub.com/HanzHaxors/DisposableEmailCLI/releases/)<br/>[![HitCount](http://hits.dwyl.io/HanzHaxors/DisposableEmailCLI.svg)](#)
 
-# NOT WORKING
-The Script is currently not working due to API changing.
 
 # DisposableEmailCLI
 Python 3.7.4 based app for disposable email service

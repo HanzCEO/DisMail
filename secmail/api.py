@@ -18,19 +18,19 @@ from json import loads
 url = "https://www.1secmail.com/api/v1/"
 
 def inbox(login, domain): #id, from, subject, date
-	resjson = loads(get(f"http://1secmail.com/api/v1/?action=getMessages&login={login}&domain={domain}").text)
+	resjson = loads(get(f"{url}?action=getMessages&login={login}&domain={domain}").text)
 	
 	return resjson
 
 def mes(login, domain, id):
-	return get(f"https://www.1secmail.com/api/v1/?action=readMessage&login={login}&domain={domain}&id={id}").text
+	return get(f"{url}?action=readMessage&login={login}&domain={domain}&id={id}").text
 
 def attachment(login, domain, id, file, size):
 	#shell('http://1secmail.com/api/v1/?action=download&login='+login+'&domain='+domain+'&id='+id+'&file='+file) # Deprecated in v0.4.0
 	
-	url = 'http://1secmail.com/api/v1/?action=download&login='+login+'&domain='+domain+'&id='+id+'&file='+file
-	nf = str(input("[#] Rename attachment to (\"no\" to make it as is): "))
-	dest = file if nf is not 'no' else nf
+	url = f'{url}?action=download&login={login}&domain={domain}&id={id}&file={file}'
+	nf = str(input("[#] Rename attachment to (leave blank to make it as is): "))
+	dest = file if nf is not '' else nf
 	u = urllib2.urlopen(url)
 
 	scheme, netloc, path, query, fragment = urlparse.urlsplit(url)
