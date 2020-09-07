@@ -26,17 +26,13 @@ def mes(login, domain, id):
 	return get(f"{url}?action=readMessage&login={login}&domain={domain}&id={id}").text
 
 def attachment(login, domain, id, file, size):
-	#shell('http://1secmail.com/api/v1/?action=download&login='+login+'&domain='+domain+'&id='+id+'&file='+file) # Deprecated in v0.4.0
-	
 	url = f'{url}?action=download&login={login}&domain={domain}&id={id}&file={file}'
 	nf = str(input("[#] Rename attachment to (leave blank to make it as is): "))
-	dest = file if nf is not '' else nf
+	dest = file if nf != '' else nf
 	u = urllib2.urlopen(url)
 
 	scheme, netloc, path, query, fragment = urlparse.urlsplit(url)
 	filename = os.path.basename(path)
-	#if not filename:
-		#filename = 'downloaded.file'
 	if dest:
 		filename = os.path.join(dest)
 	
@@ -66,6 +62,6 @@ def attachment(login, domain, id, file, size):
 					status += "   [{0:6.2f}%]".format(file_size_dl * 100 / file_size)
 				status += chr(13)
 				print(status, end="\r")
-			print("")
+			print()
 	except FileNotFoundError:
 		print("[!] File not found")

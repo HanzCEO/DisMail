@@ -19,6 +19,14 @@ git clone https://github.com/HanzHaxors/DisposableEmailCLI
 cd DisposableEmailCLI
 python3 emailinbox.py
 ```
+
+# Programs
+Name | Filename | Description
+---- | -------- | -----------
+Email Inbox | emailinbox.py | Main script that shows disposable email panel and generates email randomly or set by user
+Email Generator | emailgenerator.py | Python script for generating bulk disposable email
+Script Updater | update.py | Python script that allows you to update this tool
+
 ### 2. .exe File
 Run `dismail.exe` normally
 

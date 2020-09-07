@@ -3,7 +3,7 @@ from colorama import Fore, Back, Style, init
 import os, threading, argparse, time, json, random, re
 from secmail.api import *
 from requests import *
-from requests.exceptions import *
+from requests.exceptions import ConnectionError
 from subprocess import call as cmd
 '''
 BUG FIXES
@@ -20,45 +20,23 @@ def ClrScrn():
 ############# COLORAMA ######################
 init()
 
-fblack = Fore.BLACK
-fblue = Fore.BLUE
 fcyan = Fore.CYAN
 fgreen = Fore.GREEN
-flblack = Fore.LIGHTBLACK_EX
-flblue = Fore.LIGHTBLUE_EX
 flcyan = Fore.LIGHTCYAN_EX
 flgreen = Fore.LIGHTGREEN_EX
 flmagenta = Fore.LIGHTMAGENTA_EX
 flred = Fore.LIGHTRED_EX
 flwhite = Fore.LIGHTWHITE_EX
 flyellow = Fore.LIGHTYELLOW_EX
-fmagenta = Fore.MAGENTA
 fred = Fore.RED
 freset = Fore.RESET
 fwhite = Fore.WHITE
 fyellow = Fore.YELLOW
 
-bblack = Back.BLACK
-bblue = Back.BLUE
 bcyan = Back.CYAN
 bgreen = Back.GREEN
-blblack = Back.LIGHTBLACK_EX
-blblue = Back.LIGHTBLUE_EX
-blcyan = Back.LIGHTCYAN_EX
-blgreen = Back.LIGHTGREEN_EX
-blmagenta = Back.LIGHTMAGENTA_EX
-blred = Back.LIGHTRED_EX
-blwhite = Back.LIGHTWHITE_EX
-blyellow = Back.LIGHTYELLOW_EX
 bmagenta = Back.MAGENTA
-bred = Back.RED
-breset = Back.RESET
-bwhite = Back.WHITE
-byellow = Back.YELLOW
 
-sbright = Style.BRIGHT
-sdim = Style.DIM
-snormal = Style.NORMAL
 resetall = Style.RESET_ALL
 #############################################
 
@@ -86,6 +64,7 @@ def goRead(login, domain, eid):
 		
 		except IndexError:
 			print(tabled)
+		
 		table.field_names = [f"{fcyan}Attachments{fwhite}", f"{flyellow}Type{fwhite}", f"{flmagenta}Size (Bytes){fwhite}"]
 		print("\nMessageID: {eid}\n".format(eid=eid))
 		try:
@@ -120,7 +99,6 @@ def tableTheInbox(login, domain):
 		resInb.reverse()
 		
 		ClrScrn()
-		#print(mailIds)
 		print(f"{fwhite}Email address: "+bcyan+login+freset+"@"+bgreen+domain+resetall)
 		theJson = resInb
 		table = PrettyTable()
@@ -136,7 +114,7 @@ def tableTheInbox(login, domain):
 			exit()
 		
 		if 'r' in inp or 'n' in inp:
-			''
+			pass
 		else:
 			print(f'{fcyan}[#] Loading message...{fwhite}')
 		
