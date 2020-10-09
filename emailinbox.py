@@ -17,6 +17,12 @@ def ClrScrn():
 	os.system('cls' if os.name == 'nt' else 'clear')
 	print("\n")
 
+def pause():
+	if os.name == "nt":
+		os.system("pause")
+	else:
+		input("Press Enter to continue")
+
 ############# COLORAMA ######################
 init()
 
@@ -46,7 +52,7 @@ def goRead(login, domain, eid):
 	ClrScrn()
 	if theRes == "Message not found":
 		print(theRes)
-		os.system('pause')
+		pause()
 		tableTheInbox(login, domain)
 	else:
 		theRes = loads(theRes)
@@ -80,7 +86,7 @@ def goRead(login, domain, eid):
 				except KeyboardInterrupt:
 					print(f'{flmagenta}\n[#] Cancelling...')
 			
-			os.system('pause')
+			pause()
 			tableTheInbox(login, domain)
 	
 
