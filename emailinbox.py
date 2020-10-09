@@ -165,11 +165,14 @@ def initme():
 		hlp()
 		exit()
 	
-	if args.login and args.domain:
+	if args.login:
 		arg_login = args.login
+		dom = random.choice(["1secmail.com","1secmail.net","1secmail.org"])
+		tableTheInbox(arg_login, dom)
+	if args.domain:
 		arg_domain = args.domain
-		
-		tableTheInbox(arg_login, arg_domain)
+		log = random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")+str(random.randint(1,10000))
+		tableTheInbox(log, arg_domain)
 	if args.email:
 		arg_email = args.email
 		if '@' in arg_email:

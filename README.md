@@ -10,7 +10,7 @@ Python 3.7.4 based app for disposable email service
 * Python 3.8.x
 
 # WARNING!!
-**The author of this repository does not responsible for any illegal actions**
+**This application provided AS IS**
 
 # How to use
 ### 1. From source
