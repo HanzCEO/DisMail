@@ -1,5 +1,5 @@
-[![GitHub version](https://badge.fury.io/gh/HanzHaxors%2FDisMail.svg?style=flat-square)](https://github.com/HanzHaxors/DisMail) <br/>
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://lbesson.mit-license.org/) [![Github all releases](https://img.shields.io/github/downloads/HanzHaxors/DisMail/total.svg?style=flat-square)](https://GitHub.com/HanzHaxors/DisMail/releases/)<br/>[![HitCount](http://hits.dwyl.io/HanzHaxors/DisMail.svg)](#)
+[![GitHub version](https://badge.fury.io/gh/HanzCEO%2FDisMail.svg?style=flat-square)](https://github.com/HanzCEO/DisMail) <br/>
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://lbesson.mit-license.org/) [![Github all releases](https://img.shields.io/github/downloads/HanzCEO/DisMail/total.svg?style=flat-square)](https://GitHub.com/HanzCEO/DisMail/releases/)<br/>[![HitCount](http://hits.dwyl.io/HanzCEO/DisMail.svg)](#)
 
 
 # DisMail
