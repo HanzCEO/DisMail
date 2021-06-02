@@ -1,8 +1,8 @@
-[![GitHub version](https://badge.fury.io/gh/HanzHaxors%2FDisposableEmailCLI.svg?style=flat-square)](https://github.com/HanzHaxors/DisposableEmailCLI) <br/>
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://lbesson.mit-license.org/) [![Github all releases](https://img.shields.io/github/downloads/HanzHaxors/DisposableEmailCLI/total.svg?style=flat-square)](https://GitHub.com/HanzHaxors/DisposableEmailCLI/releases/)<br/>[![HitCount](http://hits.dwyl.io/HanzHaxors/DisposableEmailCLI.svg)](#)
+[![GitHub version](https://badge.fury.io/gh/HanzHaxors%2FDisposableEmailCLI.svg?style=flat-square)](https://github.com/HanzHaxors/DMail) <br/>
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://lbesson.mit-license.org/) [![Github all releases](https://img.shields.io/github/downloads/HanzHaxors/DMail/total.svg?style=flat-square)](https://GitHub.com/HanzHaxors/DMail/releases/)<br/>[![HitCount](http://hits.dwyl.io/HanzHaxors/DMail.svg)](#)
 
 
-# DisposableEmailCLI
+# DMail
 Python 3.7.4 based app for disposable email service
 
 # Tested On
@@ -10,38 +10,26 @@ Python 3.7.4 based app for disposable email service
 * Python 3.8.x
 
 # WARNING!!
-**This application provided AS IS**
+**This application is provided AS IS**
 
 # How to use
 ### 1. From source
+```sh
+git clone git@github.com:HanzCEO/DMail.git
+cd DMail
+python3 DMail/__main__.py [EMAIL ADDRESS]
 ```
-git clone https://github.com/HanzHaxors/DisposableEmailCLI
-cd DisposableEmailCLI
-python3 emailinbox.py
+### 2. From PyPi
+```sh
+pip3 install dmail
 ```
 
-# Programs
-Name | Filename | Description
----- | -------- | -----------
-Email Inbox | emailinbox.py | Main script that shows disposable email panel and generates email randomly or set by user
-Email Generator | emailgenerator.py | Python script for generating bulk disposable email
-Script Updater | update.py | Python script that allows you to update this tool
+# Usage
+```
+Usage: __main__.py [OPTIONS] [EMAIL]
 
-### 2. .exe File
-Run `dismail.exe` normally
-
-# Flags/Arguments
-Short Flag | Long Flag | Description
----------- | --------- | -----------
--h | --help | Shows help message (and exit)
--e | --email | A combination of login and domain like this, hanztest@1secmail.com PS: type it all for easy use including '@'
--l | --login | Username of email
--d | --domain | Domain of email (without '@')
-
-**All of the flags/arguments is optional**
-
-# What is 'username' and 'domain'?
-username is a word before '@' <br>
-domain is a word after '@' (like gmail.com, yahoo.com, etc.)
-
-**Function: for retrieve inbox from specific email 'username'@'domain'**
+Options:
+  --help  Show this message and exit.
+Arguments:
+  email   username@domain pair used for login, defaults to random email
+```
