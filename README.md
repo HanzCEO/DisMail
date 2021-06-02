@@ -1,8 +1,8 @@
-[![GitHub version](https://badge.fury.io/gh/HanzHaxors%2FDisposableEmailCLI.svg?style=flat-square)](https://github.com/HanzHaxors/DMail) <br/>
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://lbesson.mit-license.org/) [![Github all releases](https://img.shields.io/github/downloads/HanzHaxors/DMail/total.svg?style=flat-square)](https://GitHub.com/HanzHaxors/DMail/releases/)<br/>[![HitCount](http://hits.dwyl.io/HanzHaxors/DMail.svg)](#)
+[![GitHub version](https://badge.fury.io/gh/HanzHaxors%2FDisMail.svg?style=flat-square)](https://github.com/HanzHaxors/DisMail) <br/>
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://lbesson.mit-license.org/) [![Github all releases](https://img.shields.io/github/downloads/HanzHaxors/DisMail/total.svg?style=flat-square)](https://GitHub.com/HanzHaxors/DisMail/releases/)<br/>[![HitCount](http://hits.dwyl.io/HanzHaxors/DisMail.svg)](#)
 
 
-# DMail
+# DisMail
 Python 3.7.4 based app for disposable email service
 
 # Tested On
@@ -15,13 +15,17 @@ Python 3.7.4 based app for disposable email service
 # How to use
 ### 1. From source
 ```sh
-git clone git@github.com:HanzCEO/DMail.git
-cd DMail
-python3 DMail/__main__.py [EMAIL ADDRESS]
+git clone git@github.com:HanzCEO/DisMail.git
+cd DisMail
+python3 DisMail/__main__.py [EMAIL ADDRESS]
 ```
 ### 2. From PyPi
 ```sh
-pip3 install dmail
+pip3 install DisMail
+
+DisMail [EMAIL ADDRESS]
+# or
+dismail [EMAIL ADDRESS]
 ```
 
 # Usage

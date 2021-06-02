@@ -1,6 +1,6 @@
 import click, random, string, curses
-from secmail import *
-from interface import *
+from .secmail import *
+from .interface import *
 
 # Globals
 account			= None

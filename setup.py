@@ -9,12 +9,12 @@ README = (HERE / "README.md").read_text()
 
 # This call to setup() does all the work
 setup(
-	name="dmail",
-	version="1.0.0-rc1",
+	name="DisMail",
+	version="1.0.0rc2",
 	description="CLI to help you read your disposable emails straight from your console",
 	long_description=README,
 	long_description_content_type="text/markdown",
-	url="https://github.com/HanzCEO/DMail",
+	url="https://github.com/HanzCEO/DisMail",
 	author="HanzHaxors",
 	author_email="hanzhaxors@gmail.com",
 	license="MIT",
@@ -23,12 +23,13 @@ setup(
 		"Programming Language :: Python :: 3",
 		"Programming Language :: Python :: 3.7",
 	],
-	packages=["DMail"],
+	packages=["DisMail", "DisMail.secmail", "DisMail.interface"],
 	include_package_data=True,
 	install_requires=["requests", "click"],
 	entry_points={
 		"console_scripts": [
-		    "dmail=DMail.__main__:main",
+		    "dismail=DisMail.__main__:main",
+		    "DisMail=DisMail.__main__:main",
 		]
 	},
 )

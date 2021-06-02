@@ -3,3 +3,6 @@ __pycache__/
 venv/
 archive/
 Makefile
+*.egg-info/
+build/
+dist/

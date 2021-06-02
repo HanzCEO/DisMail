@@ -8,6 +8,9 @@ clean:
 	mv dist/* archive
 
 upload:
-	python3 setup.py sdist bdist_wheel
+	@echo ---- BUILDING -------------------------------------
+	sudo python3 setup.py sdist bdist_wheel
+	@echo ---- CHECKING -------------------------------------
 	twine check dist/*
+	@echo ---- UPLOADING ------------------------------------
 	twine upload dist/*
