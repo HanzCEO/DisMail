@@ -6,3 +6,4 @@ Makefile
 *.egg-info/
 build/
 dist/
+*~
