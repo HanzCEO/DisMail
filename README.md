@@ -1,4 +1,4 @@
-# DisMail
+# DisMail (REWORKED to satify requirements to bump to v1.0)
 Python 3.7.4 based app for disposable email service
 
 # Tested On
