@@ -25,7 +25,9 @@ setup(
 	],
 	packages=["DisMail"],
 	include_package_data=True,
-	install_requires=["requests", "click"],
+	install_requires=[
+		"requests==2.26.0", "click==8.0.3"
+	],
 	entry_points={
 		"console_scripts": [
 		    "dismail=DisMail.__main__:main"
