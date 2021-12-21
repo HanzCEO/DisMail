@@ -16,7 +16,57 @@ def main(email):
 	account = SecmailAccount(email)
 
 	account.refresh()
-	print(account.get_inbox())
+	#print(account.test())
+
+	input_loop(account)
+
+def display_mail(mail):
+	print("=" * 20)
+	print(f"{mail.subject}")
+	print(f"From: {mail.sender}")
+	print(f"Date: {mail.date}\n")
+
+	print(mail.textbody)
+	input("Press Enter/Return to continue")
+
+def menu(account):
+	print(
+		f"{account.email}\n" +
+		"=" * 20 + "\n"
+	)
+
+	for mail in account.get_inbox():
+		print(f"[{mail.position}] {mail.sender}: {mail.subject[:20]} | {mail.date}")
+
+	print()
+	print(f"Page {account.pagination+1} of {account.get_max_page()}")
+	print("r - Refresh inbox")
+	print("q - Quit")
+	print("b - Previous page")
+	print("n - Next page")
+	print("Type the email number to read them")
+
+def input_loop(account):
+	while True:
+		print("\n" * 50)
+		menu(account)
+		inp = input(">> ")
+
+		if inp == "r":
+			account.refresh()
+		elif inp == "q":
+			break
+
+		elif inp == "b":
+			account.pagination -= 1
+		elif inp == "n":
+			account.pagination += 1
+
+		elif inp.isnumeric():
+			index = int(inp) - 1
+			mail = account.get_mail(index)
+			# Display email
+			display_mail(mail)
 
 if __name__ == "__main__":
 	main()
