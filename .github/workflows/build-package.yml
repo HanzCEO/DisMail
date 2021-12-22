@@ -1,0 +1,28 @@
+# This workflow assist pull reviewer on the code result
+
+name: Build Pull Request Binary
+
+on:
+  pull_request:
+    types: [ready_for_review]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build
+    - name: Build package
+      run: python setup.py bdist_wheel
+    - uses: actions/upload-artifact@v2
+      with:
+        name: wheel
+        path: dist/*.whl
