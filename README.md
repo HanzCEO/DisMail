@@ -1,4 +1,4 @@
-# DisMail
+# DisMail (PR Test)
 Python 3 based app for disposable email service
 
 ## How to use
