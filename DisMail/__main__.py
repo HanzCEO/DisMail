@@ -1,8 +1,8 @@
 import re, random
 import click
 
-from mailutils import generate_email
-from api.secmail import SecmailAccount, download_attachment
+from .mailutils import generate_email
+from .api.secmail import SecmailAccount, download_attachment
 
 @click.command()
 @click.argument("email", required=False)
