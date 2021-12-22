@@ -1,27 +1,20 @@
-# DisMail (REWORKED to satify requirements to bump to v1.0)
-Python 3.7.4 based app for disposable email service
+# DisMail
+Python 3 based app for disposable email service
 
-# Tested On
-* Python 3.7.x
-* Python 3.8.x
-
-# How to use
+## How to use
 ### 1. From source
 ```sh
-git clone git@github.com:HanzCEO/DisMail.git
-cd DisMail
-python3 DisMail/__main__.py [EMAIL ADDRESS]
+$ git clone git@github.com:HanzCEO/DisMail.git
+$ cd DisMail
+$ python3 DisMail/__main__.py [EMAIL ADDRESS]
 ```
 ### 2. From PyPi
 ```sh
-pip3 install DisMail
-
-DisMail [EMAIL ADDRESS]
-# or
-dismail [EMAIL ADDRESS]
+$ sudo pip3 install DisMail
+$ dismail [EMAIL ADDRESS]
 ```
 
-# Usage
+## Usage
 ```
 Usage: dismail [OPTIONS] [EMAIL]
 
@@ -30,3 +23,6 @@ Options:
 Arguments:
   email   username@domain pair used for login, defaults to random email
 ```
+
+## Known issues
+ - **SecMail API** limit attachment size to around 40000 bytes
