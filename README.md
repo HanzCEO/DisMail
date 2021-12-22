@@ -1,7 +1,7 @@
 # DisMail
 Python 3 based app for disposable email service
 
-# How to use
+## How to use
 ### 1. From source
 ```sh
 $ git clone git@github.com:HanzCEO/DisMail.git
@@ -14,7 +14,7 @@ $ sudo pip3 install DisMail
 $ dismail [EMAIL ADDRESS]
 ```
 
-# Usage
+## Usage
 ```
 Usage: dismail [OPTIONS] [EMAIL]
 
@@ -23,3 +23,6 @@ Options:
 Arguments:
   email   username@domain pair used for login, defaults to random email
 ```
+
+## Known issues
+ - **SecMail API** limit attachment size to around 40000 bytes

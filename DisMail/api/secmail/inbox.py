@@ -1,4 +1,4 @@
-import requests
+import requests, os
 
 from .classes import Mail
 
@@ -23,4 +23,15 @@ def read_mail(login, domain, mailid):
 	return Mail(mailid=data["id"], sender=data["from"], **data)
 
 def download_attachment(login, domain, mailid, filename):
-	pass
+	MAX_SPEED = 4096
+	res = requests.get(
+		format_url("download", login=login, domain=domain, id=mailid, file=filename),
+		stream=True
+	)
+	# TODO: Check response
+
+	output = open(f"{os.getcwd()}/{filename}", "wb")
+
+	for chunk in res.iter_content(MAX_SPEED):
+		output.write(chunk)
+		yield output.tell()

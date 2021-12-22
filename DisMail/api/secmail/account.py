@@ -23,7 +23,12 @@ class SecmailAccount(object):
 		self.inbox = Inbox(stashes)
 
 	def get_max_page(self, amount=5):
-		return len(self.inbox.stashes) // amount + 1
+		retval = len(self.inbox.stashes) // amount
+
+		if len(self.inbox.stashes) % amount != 0:
+			retval += 1
+
+		return retval
 
 	def get_inbox(self, pagination=None, amount=5):
 		if pagination is not None:
