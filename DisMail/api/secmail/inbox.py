@@ -10,14 +10,16 @@ def format_url(action, **kwargs):
 
 def get_inbox(login, domain):
 	res = requests.get(format_url("getMessages", login=login, domain=domain))
-	# TODO: Check response
+	if not res.ok:
+		raise Exception("Response shows error: " + res.text)
 
 	data = res.json()
 	return data
 
 def read_mail(login, domain, mailid):
 	res = requests.get(format_url("readMessage", login=login, domain=domain, id=mailid))
-	# TODO: Check response
+	if not res.ok:
+		raise Exception("Response shows error: " + res.text)
 
 	data = res.json()
 	return Mail(mailid=data["id"], sender=data["from"], **data)
@@ -28,7 +30,8 @@ def download_attachment(login, domain, mailid, filename):
 		format_url("download", login=login, domain=domain, id=mailid, file=filename),
 		stream=True
 	)
-	# TODO: Check response
+	if not res.ok:
+		raise Exception("Response shows error: " + res.text)
 
 	output = open(f"{os.getcwd()}/{filename}", "wb")
 
