@@ -1,6 +1,8 @@
 # DisMail
 Python 3 based app for disposable email service
 
+[![Downloads](https://static.pepy.tech/personalized-badge/dismail?period=total&units=none&left_color=grey&right_color=yellowgreen&left_text=Downloads)](https://pepy.tech/project/dismail)
+
 ## How to use
 ### 1. From source
 ```sh
