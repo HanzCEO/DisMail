@@ -20,6 +20,13 @@ def main(email):
 
 	input_loop(account)
 
+def size_convert(file_size):
+    for unit in ['B', 'KB', 'MB', 'GB', 'TB']:
+        if file_size < 1024 or unit == 'TB':
+            break
+        file_size /= 1024.0
+    return f'{file_size:.2f} {unit}'
+
 def display_mail(account, mail):
 	print("=" * 20)
 	print(f"{mail.subject}")
@@ -34,7 +41,7 @@ def display_mail(account, mail):
 		print("=" * 20)
 
 		for i, atch in enumerate(mail.attachments, start=1):
-			print(f"[{i}] {atch['filename']} ({atch['size']} bytes)")
+			print(f"[{i}] {atch['filename']} ({size_convert(atch['size'])})")
 
 		inp = input("Download attachment? (Y/N) ")
 		if inp.upper() == "Y":
@@ -53,7 +60,7 @@ def display_mail(account, mail):
 				)
 
 				for progress in stream:
-					print(f"{filename} ({progress} of {filesize} bytes)", end="\r")
+					print(f"{filename} ({size_convert(progress)} of {size_convert(filesize)})", end="\r")
 				print("\nFile downloaded")
 
 	input("Press Enter/Return to continue to menu")
