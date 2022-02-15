@@ -28,6 +28,9 @@ class SecmailAccount(object):
 		if len(self.inbox.stashes) % amount != 0:
 			retval += 1
 
+		if retval == 0:
+			retval = 1
+
 		return retval
 
 	def get_inbox(self, pagination=None, amount=5):
