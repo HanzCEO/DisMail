@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
 	name="DisMail",
-	version="1.0.0",
+	version="1.0.1",
 	description="CLI to help you read your disposable emails straight from your console",
 	long_description=README,
 	long_description_content_type="text/markdown",
